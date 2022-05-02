@@ -13,6 +13,7 @@ Le jeu est composé de:
 
 * un ou plusieurs agents "joueurs" (que nous nommerons aussi "client" pour coller au vocabulaire usuel au niveau
   technique)
+
 * un agent "arbitre" (que nous nommerons aussi "serveur")
 
 La partie se déroule ainsi:
@@ -125,12 +126,21 @@ Le premier challenge est le *HashCash*; au moins un autre challenge sera à déf
 ## Les modalités de réalisation
 
 * Le projet doit être traité par groupe de 2 ou 3 personnes
-* Le code doit remis sous Git (github ou gitlab)
+
+* Le code doit remis sous Git (github ou gitlab).
+
+  Le projet Git devra être créé à partir d'un *fork* du projet portant le sujet (et n'oubliez pas de m'en donner l'accès en lecture).
+
 * Le code doit être fonctionnel sous Linux, macOS et Windows
+
 * Le code devra être raisonnablement testé (par des tests unitaires et des tests d'intégration)
+
 * Le code devra suivre les règles de codage défini par `rustfmt`
+
 * Le code devra être documenté avec `rustdoc`
+
 * La documentation devra être intégrée au dépôt du code et écrite au format Markdown.
+
 * Les seuls modules (*aka* crates) autorisés ici sont:
     * `rand`
     * `clap`
