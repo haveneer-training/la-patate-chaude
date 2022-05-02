@@ -1,0 +1,44 @@
+version: '3'
+
+networks:
+  platform:
+
+volumes:
+    server:
+    client:
+
+services:
+    server:
+        build:
+            context: ./server
+            dockerfile: Dockerfile
+        environment:
+            - PORT=7878
+        ports:
+            - 7878:7878
+        volumes:
+            - server:/home/app
+        networks:
+            platform:
+                aliases:
+                    - referee
+    client:
+        build:
+            context: ./client
+            dockerfile: Dockerfile
+        environment:
+            - PORT=3030
+        ports:
+            - 3030:3030
+        volumes:
+            - client:/home/app
+        networks:
+            platform:
+                aliases:
+                    - player1
+                    - player2
+                    - player3
+                    - player4
+                    - player5
+                    - player6
+                    - player7

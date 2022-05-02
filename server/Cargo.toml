@@ -1,0 +1,9 @@
+[package]
+name = "hot_patatoe_server"
+version = "0.1.0"
+authors = ["esgi-al1 <paul.barrie.calmels@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+tokio = { version = "0.2", features = ["full"] }
+warp = "0.2"
