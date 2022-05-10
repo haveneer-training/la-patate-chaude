@@ -313,7 +313,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "hot_reload_workflow"
+name = "hot_patatoe_srv"
 version = "0.1.0"
 dependencies = [
  "tokio",

@@ -9,3 +9,8 @@ Launch the platform running:
 ```
  docker compose up
 ```
+
+> ## Notes pour plus tard
+
+* Les messages doivent ils-avoir un \"?
+* Comment utiliser un option pour une struct ou mettre une valeur par défaut dans les aargs d'une fonction?
