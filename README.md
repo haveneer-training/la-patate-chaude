@@ -82,15 +82,17 @@ Tout challenge doit respecter l'interface imposée par le `trait` suivant:
 
 ```rust
 trait Challenge {
-    // Données en entrée du challenge
+    /// Données en entrée du challenge
     type Input;
-    // Données en sortie du challenge
+    /// Données en sortie du challenge
     type Output;
-    // Nom du challenge
+    /// Nom du challenge
     fn name() -> String;
-    // Résout le challenge
+    /// Create a challenge from the specific input
+    fn new(input: Self::Input) -> Self;
+    /// Résout le challenge
     fn solve(&self) -> Self::Output;
-    // Vérifie qu'une sortie est valide pour le challenge
+    /// Vérifie qu'une sortie est valide pour le challenge
     fn verify(&self, answer: Self::Output) -> bool;
 }
 ```
@@ -99,13 +101,13 @@ Différents challenges pourront être requis pour le jeu.
 
 Le premier challenge est le *HashCash*; au moins un autre challenge sera à définir collectivement.
 
-1. [HashCash : le challenge de preuve de travail](md5-hashcash.md)
+1. [`HashCash` : le challenge de preuve de travail](md5-hashcash.md)
 
-1. Recover a secret string for random n-tuples (à qualifier plus tard)
+1. [`MonstrousMaze` : le challenge d'évasion](monstrous-maze.md)
+
+1. [`RecoverSecret` : le challenge de décodage](recover_secret.md)
 
 1. Nonogram solver (à qualifier plus tard)
-
-1. Path finder with monsters (à qualifier plus tard)
 
 1. Bloxorz Solver (à qualifier plus tard)
 

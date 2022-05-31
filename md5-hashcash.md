@@ -1,4 +1,4 @@
-### [HashCash](https://fr.wikipedia.org/wiki/Hashcash) : Le challenge de preuve de travail
+### [`HashCash`](https://fr.wikipedia.org/wiki/Hashcash) : Le challenge de preuve de travail
 
 En entrée du challenge, soient:
 
