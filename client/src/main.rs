@@ -1,16 +1,17 @@
-use warp::Filter;
+// use std::net::TcpListener;
 
-#[tokio::main]
-async fn main() {
-    println!("Creating routes");
-    // GET /hello/warp => 200 OK with body "Hello, warp!"
-    let hello = warp::path!("hello" / String)
-        .map(|name| format!("Hello, {}!", name));
+mod message;
+mod client;
 
-    println!("Starting server");
-    warp::serve(hello)
-        .run(([0, 0, 0, 0], 3030))
-        .await;
+fn main() {
+    println!("Connecting to server...");
+    // let listener = TcpListener::bind("127.0.0.1:7676");
+    // let listener = listener.expect("Cannot bind address");
+    
+    // for(message: Result<TopStream> in listener.incoming()) {
+    //     let message = message.expect("Cannot read message");
+    //     println!("{}", message);
+    // }
 }
 
 
