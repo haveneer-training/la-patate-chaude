@@ -210,6 +210,13 @@ Tous les messages sont de la forme:
 | `RoundSummary`      | `challenge: String`<br/>`chain: Vec<ReportedChallengeResult>` | `{"RoundSummary":{"challenge":"MD5HashCash","chain":[{"name":"free_patato","value":{"Ok":{"used_time":0.1,"next_target":"dark_salad"}}},{"name":"dark_salad","value":"Unreachable"}]}}`                                                                                                                        | 
 | `EndOfGame`         | `leader_board: PublicLeaderBoard`                             | `{"EndOfGame":{"leader_board":[{"name":"free_patato","stream_id":"127.0.0.1","score":10,"steps":20,"is_active":true,"total_used_time":1.234},{"name":"dark_salad","stream_id":"127.0.0.1","score":6,"steps":200,"is_active":true,"total_used_time":0.1234}]}}`                                                 | 
 
+### Séquencement des messages
+
+![Séquencement des messages](images/Sequence.drawio.svg "Séquencement des messages")
+
+
+
+
 ### Les types additionnels:
 
 | Nom du type               | Description du type                                                                                                                                                                                           |

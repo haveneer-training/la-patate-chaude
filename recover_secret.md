@@ -19,6 +19,7 @@ Par exemple la phrase: ```il fait froid``` peut être associée aux n-uplets sui
 
 ```rust
 pub struct RecoverSecretInput {
+    pub word_count: usize,
     pub letters: String,
     pub tuple_sizes: Vec<usize>,
 }
@@ -34,6 +35,15 @@ Les données d'entrée présentent une forme de compression parfois appelé CSR 
 |:------------------------------------------------------------------------------------------------:|-----|-----|-----|-----|-----|-----|-----|-----|-----|
 |                                           tuple_sizes                                            | 3   |     |     | 2   |     | 4   |     |     |     |
 | associated tuple   <td colspan=3> a,b,c</td> <td colspan=2> d,e</td> <td colspan=4> a,c,b,d</td> |
+
+## Quelques phrases générées pour le défi:
+
+* *infâmement maman et papa débuchent quatre\-vingt\-treize esprits des ténèbres*
+* *par tous les temps une tête de mule amouillai vingt\-deux cépages chardonnay*
+* *étonnamment l'esprit et le corps chènevottent quarante\-neuf facultés de philologie*
+* *thermoélectriquement le comment et le pourquoi déchargeaient vos décotes*
+* *du train où ça aller vous réabriterez cent vingt\-trois réunions générales*
+* *et ainsi de suite ils redéclassaient soixante\-cinq halètements*
 
 ## Remarques pas tout à fait inutiles
 
