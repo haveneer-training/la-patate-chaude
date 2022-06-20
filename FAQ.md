@@ -31,6 +31,13 @@ sont lus par le serveur comme un entier 32 bits (4 octets). Par exemple un messa
 (ici 2 octets) sera insuffisant pour reconstruire l'entier 32 bits attendu par le serveur. Il attendra encore 2 octets
 jusqu'au timeout.
 
+## Séquencement des messages
+
+L'ordre d'apparition des messages ainsi les émetteurs/récepteurs concernés étaient un peu trop implicite dans la
+première version du sujet. N'hésitez pas à consulter
+le [nouveau diagramme](https://github.com/haveneer-training/la-patate-chaude#séquencement-des-messages) pour plus de
+précisions.
+
 # Spécifications du serveur
 
 ## Mécanisme de `StartGame`
