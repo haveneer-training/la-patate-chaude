@@ -1,5 +1,11 @@
 # Projet Rust: *la Patate Chaude* <br> Architecture des Logiciels - 4<sup>ème</sup> année - ESGI
 
+---
+
+**Flash news**: la [FAQ](FAQ.md)
+
+---
+
 Vous connaissez peut-être [l'expression](https://fr.wiktionary.org/wiki/patate_chaude)
 ou [le jeu](https://www.momes.net/jeux/jeux-exterieur/courses-relais-rapidite/patate-chaude-842114) de la *patate
 chaude*.
