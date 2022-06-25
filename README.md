@@ -99,7 +99,7 @@ trait Challenge {
     /// Résout le challenge
     fn solve(&self) -> Self::Output;
     /// Vérifie qu'une sortie est valide pour le challenge
-    fn verify(&self, answer: Self::Output) -> bool;
+    fn verify(&self, answer: &Self::Output) -> bool;
 }
 ```
 
