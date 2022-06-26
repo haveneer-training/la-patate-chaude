@@ -50,6 +50,17 @@ Les données d'entrée présentent une forme de compression parfois appelé CSR 
 * Tous les mots viennent de listes fournies dans le répertoire [`data`](data) et forment autant que possible des phrases
   aléatoires raisonnablement construites.
 * Les lettres sont encodées en UTF-8
-* L'augmentation de complexité portera sur la répétition de lettres (multiples occurrences) et la longueur de la phrase. 
+* L'augmentation de complexité portera sur la répétition de lettres (multiples occurrences) et la longueur de la phrase.
+* Une réponse est réputée valide non pas quand elle est exacte à la phrase générée par le serveur, mais quand elle
+  respecte toutes les contraintes relatives au nombre de mots et à l'ordre des n-uplets de caractères (et avec des mots
+  du dictionnaire à partir d'une complexité de niveau 17).
 
+## Gestion de la complexité
 
+La complexité se règle au niveau du serveur avec l'option `--complexity <valeur>`.
+
+* Si `valeur` vaut 0: la phrase secrète est toujours: `C'est chou`
+* Si `valeur` vaut entre 1 et 16 (inclus): la phrase secrète est une séquence aléatoire de caractères **tous distincts**
+  .
+* Si `valeur` vaut 17: la phrase secrète est `Il fait froid` (c'est le début des répétitions)
+* Au delà, ce sera des phrases réelles telles qu'énoncées ci-dessus (avec des mots du dictionnaire)
