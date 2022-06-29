@@ -12,9 +12,9 @@ fn send_message(mut stream: &TcpStream, message: Message) {
     stream.write_all(&serialized.as_bytes()).unwrap();
 }
 
-fn on_welcome(stream: &TcpStream, welcome: Welcome) {
+fn on_welcome(stream: &TcpStream, welcome: Welcome, name: &String) {
     println!("welcome: {welcome:?}");
-    let subscribe = Subscribe { name: String::from("Paul") };
+    let subscribe = Subscribe { name: name.clone() };
     send_message(stream, Message::Subscribe(subscribe));
 }
 
@@ -22,7 +22,7 @@ fn on_subscribe_result( subscribe_result: SubscribeResult) {
     println!("subscribe_result: {subscribe_result:?}");
 }
 
-fn main_loop(mut stream: &TcpStream){
+fn main_loop(mut stream: &TcpStream, name: &String){
 
     let mut buf = [0; 4];
 
@@ -51,7 +51,7 @@ fn main_loop(mut stream: &TcpStream){
 
         match record {
             Message::Hello => {}
-            Message::Welcome(welcome) => { on_welcome(stream, welcome)}
+            Message::Welcome(welcome) => { on_welcome(stream, welcome, name)}
             Message::Subscribe(_) => {}
             Message::SubscribeResult(subscribe_result) => { on_subscribe_result( subscribe_result); }
         }
@@ -62,10 +62,12 @@ fn main_loop(mut stream: &TcpStream){
 fn main() {
     println!("Hello, world!");
 
+    let name = std::env::args().nth(1).expect("no name given");
+
     let stream = TcpStream::connect("localhost:7878");
     match stream {
         Ok(stream ) => {
-          main_loop(&stream);
+          main_loop(&stream, &name);
         }
         Err(err) => panic!("Cannot connect: {err}")
     }
