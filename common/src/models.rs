@@ -1,7 +1,7 @@
 use serde::{Serialize, Deserialize};
-use crate::models_md5_hash_cash::{MD5HashCashInput, MD5HashCashOutput};
-use crate::models_monstrous_maze::{MonstrousMazeInput, MonstrousMazeOutput};
-use crate::models_recover_secret::{RecoverSecretInput, RecoverSecretOutput};
+use crate::challenge::models_md5_hash_cash::{MD5HashCashInput, MD5HashCashOutput};
+use crate::challenge::models_monstrous_maze::{MonstrousMazeInput, MonstrousMazeOutput};
+use crate::challenge::models_recover_secret::{RecoverSecretInput, RecoverSecretOutput};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Hello {}
