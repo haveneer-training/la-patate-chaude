@@ -1,10 +1,10 @@
 mod server_communication;
 mod player_init;
 
-use std::io::{Read, Write};
+use std::io::Read;
 use std::net::{TcpStream};
 
-use common::models::{Challenge, EndOfGame, Message, PublicPlayer, RoundSummary, Subscribe, SubscribeResult, Welcome};
+use common::models::{Challenge, EndOfGame, Message, PublicPlayer, RoundSummary};
 use crate::player_init::{on_subscribe_result, on_welcome};
 use crate::server_communication::send_message;
 

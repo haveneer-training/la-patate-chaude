@@ -1,4 +1,6 @@
 use serde::{Serialize, Deserialize};
+use crate::models_md5_hash_cash::MD5HashCashInput;
+use crate::models_md5_hash_cash::MD5HashCashOutput;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Hello {}
@@ -38,11 +40,13 @@ pub struct PublicPlayer {
 #[derive(Debug, Serialize, Deserialize)]
 pub enum Challenge {
     NONE,
+    MD5HashCash(MD5HashCashInput),
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub enum ChallengeAnswer {
-    NONE
+    NONE,
+    MD5HashCash(MD5HashCashOutput),
 }
 
 #[derive(Debug, Serialize, Deserialize)]
