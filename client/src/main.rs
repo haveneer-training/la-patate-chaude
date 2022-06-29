@@ -1,17 +1,14 @@
 use std::io::{Read, Write};
 use std::net::{TcpStream};
-use byteorder::{BigEndian, ByteOrder};
 
 use common::models::{Message, Subscribe, SubscribeResult, Welcome};
 
 fn send_message(mut stream: &TcpStream, message: Message) {
     let serialized = serde_json::to_string(&message).unwrap();
-    println!("sending message serialized: {serialized:?}");
+    let serialized_size = serialized.len() as u32;
+    println!("sending message serialized ({serialized_size:?}) : {serialized:?}");
 
-    let mut buf = [0; 4];
-    BigEndian::write_u32(&mut buf, serialized.len() as u32);
-
-    stream.write_all(&buf).unwrap();
+    stream.write_all(&serialized_size.to_be_bytes()).unwrap();
     stream.write_all(&serialized.as_bytes()).unwrap();
 }
 
