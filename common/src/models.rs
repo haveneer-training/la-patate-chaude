@@ -54,7 +54,7 @@ pub enum ChallengeAnswer {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ChallengeResult {
-    pub name: ChallengeAnswer,
+    pub answer: ChallengeAnswer,
     pub next_target: String,
 }
 
@@ -91,6 +91,7 @@ pub enum Message {
     SubscribeResult(SubscribeResult),
     PublicLeaderBoard(Vec<PublicPlayer>),
     Challenge(Challenge),
+    ChallengeResult(ChallengeResult),
     RoundSummary(RoundSummary),
     EndOfGame(EndOfGame),
 }

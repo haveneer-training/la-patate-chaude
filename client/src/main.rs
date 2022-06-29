@@ -3,8 +3,12 @@ mod player_init;
 
 use std::io::Read;
 use std::net::{TcpStream};
+use serde::de::Unexpected::Str;
 
-use common::models::{Challenge, EndOfGame, Message, PublicPlayer, RoundSummary};
+use common::models::{Challenge, ChallengeAnswer, ChallengeResult, EndOfGame, Message, PublicPlayer, RoundSummary};
+use common::models_md5_hash_cash::{MD5HashCashInput, MD5HashCashOutput};
+use common::models_monstrous_maze::{MonstrousMazeInput, MonstrousMazeOutput};
+use common::models_recover_secret::{RecoverSecretInput, RecoverSecretOutput};
 use crate::player_init::{on_subscribe_result, on_welcome};
 use crate::server_communication::send_message;
 
@@ -13,8 +17,32 @@ fn on_leader_board(leader_board: Vec<PublicPlayer>){
     println!("LeaderBoard: {leader_board:?}");
 }
 
-fn on_challenge(stream: &TcpStream, challenge: Challenge){
+fn md5_challenge_resolver(input: MD5HashCashInput) -> MD5HashCashOutput{
+    return MD5HashCashOutput{seed: 0, hashcode: String::from("")};
+}
 
+fn maze_challenge_resolver(input: MonstrousMazeInput) -> MonstrousMazeOutput{
+    return MonstrousMazeOutput{ path: String::from("")};
+}
+
+fn secret_challenge_resolver(input: RecoverSecretInput) -> RecoverSecretOutput{
+    return RecoverSecretOutput{secret_sentence: String::from("")}
+}
+
+fn on_challenge(stream: &TcpStream, challenge: Challenge){
+    let mut chalenge_answer :ChallengeAnswer;
+
+    match challenge {
+        Challenge::MD5HashCash(input) => { chalenge_answer = ChallengeAnswer::MD5HashCash( md5_challenge_resolver(input)); }
+        Challenge::MonstrousMaze(input) =>  { chalenge_answer = ChallengeAnswer::MonstrousMaze( maze_challenge_resolver(input)); }
+        Challenge::RecoverSecret(input) =>  { chalenge_answer = ChallengeAnswer::RecoverSecret( secret_challenge_resolver(input)); }
+    }
+
+    let next_target = String::from("");
+
+
+    let challenge_result = ChallengeResult{ answer: chalenge_answer, next_target};
+    send_message(stream, Message::ChallengeResult(challenge_result));
 }
 
 fn on_round_summary(stream: &TcpStream, summary: RoundSummary){
@@ -58,6 +86,7 @@ fn main_loop(mut stream: &TcpStream, name: &String){
             Message::Challenge(challenge) => { on_challenge(stream, challenge);}
             Message::RoundSummary(summary) => {on_round_summary(stream, summary);}
             Message::EndOfGame(end_of_game) => {on_end_of_game(end_of_game); break;}
+            Message::ChallengeResult(_) => {}
         }
     }
 

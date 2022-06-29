@@ -11,7 +11,7 @@ pub struct MD5HashCashInput {
 #[derive(Debug, Serialize, Deserialize)]
 pub struct MD5HashCashOutput {
     // Seed used to solve the challenge
-    seed: u64,
+    pub seed: u64,
     // hashcode found using seed + message
-    hashcode: String,
+    pub hashcode: String,
 }
