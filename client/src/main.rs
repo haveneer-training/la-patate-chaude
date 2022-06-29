@@ -1,26 +1,10 @@
+mod server_communication;
+mod player_init;
+
 use std::io::{Read, Write};
 use std::net::{TcpStream};
 
 use common::models::{Message, Subscribe, SubscribeResult, Welcome};
-
-fn send_message(mut stream: &TcpStream, message: Message) {
-    let serialized = serde_json::to_string(&message).unwrap();
-    let serialized_size = serialized.len() as u32;
-    println!("sending message serialized ({serialized_size:?}) : {serialized:?}");
-
-    stream.write_all(&serialized_size.to_be_bytes()).unwrap();
-    stream.write_all(&serialized.as_bytes()).unwrap();
-}
-
-fn on_welcome(stream: &TcpStream, welcome: Welcome, name: &String) {
-    println!("welcome: {welcome:?}");
-    let subscribe = Subscribe { name: name.clone() };
-    send_message(stream, Message::Subscribe(subscribe));
-}
-
-fn on_subscribe_result( subscribe_result: SubscribeResult) {
-    println!("subscribe_result: {subscribe_result:?}");
-}
 
 fn main_loop(mut stream: &TcpStream, name: &String){
 
@@ -41,13 +25,9 @@ fn main_loop(mut stream: &TcpStream, name: &String){
         println!("message_size: {message_size:?}");
 
         let mut message_buf = vec![0; message_size as usize];
-        stream.read_exact(&mut message_buf).expect("TODO: panic message");
+        stream.read_exact(&mut message_buf).expect("failed to read message");
 
-        let message = std::str::from_utf8(&message_buf).expect("TODO: panic message");
-        println!("message: {message:?}");
-
-        let record : Message = serde_json::from_str(&message).expect("TODO: panic message");
-        println!("message: {record:?}");
+        let record = buffer_to_object(&mut message_buf);
 
         match record {
             Message::Hello => {}
@@ -57,6 +37,15 @@ fn main_loop(mut stream: &TcpStream, name: &String){
         }
     }
 
+}
+
+fn buffer_to_object(message_buf: &mut Vec<u8>) -> Message {
+    let message = std::str::from_utf8(&message_buf).expect("failed to parse message");
+    println!("message: {message:?}");
+
+    let record: Message = serde_json::from_str(&message).expect("failed to parse message");
+    println!("message: {record:?}");
+    record
 }
 
 fn main() {
