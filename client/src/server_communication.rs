@@ -2,7 +2,7 @@ use std::io::Write;
 use std::net::TcpStream;
 use common::models::Message;
 
-fn send_message(mut stream: &TcpStream, message: Message) {
+pub fn send_message(mut stream: &TcpStream, message: Message) {
     let serialized = serde_json::to_string(&message).unwrap();
     let serialized_size = serialized.len() as u32;
     println!("sending message serialized ({serialized_size:?}) : {serialized:?}");

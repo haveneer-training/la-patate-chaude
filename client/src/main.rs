@@ -5,6 +5,8 @@ use std::io::{Read, Write};
 use std::net::{TcpStream};
 
 use common::models::{Message, Subscribe, SubscribeResult, Welcome};
+use crate::player_init::{on_subscribe_result, on_welcome};
+use crate::server_communication::send_message;
 
 fn main_loop(mut stream: &TcpStream, name: &String){
 
