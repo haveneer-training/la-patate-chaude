@@ -1,10 +1,10 @@
 mod server_communication;
 mod player_init;
 
-use std::io::{Read, Write};
+use std::io::{Read};
 use std::net::{TcpStream};
 
-use common::models::{Challenge, EndOfGame, Message, PublicPlayer, RoundSummary, Subscribe, SubscribeResult, Welcome};
+use common::models::{Challenge, EndOfGame, Message, PublicPlayer, RoundSummary};
 use crate::player_init::{on_subscribe_result, on_welcome};
 use crate::server_communication::send_message;
 
@@ -54,7 +54,7 @@ fn main_loop(mut stream: &TcpStream, name: &String){
             Message::Welcome(welcome) => { on_welcome(stream, welcome, name)}
             Message::Subscribe(_) => {}
             Message::SubscribeResult(subscribe_result) => { on_subscribe_result( subscribe_result); }
-            Message::PublicLeaderBoard(leaderBoard) => { on_leader_board(leaderBoard); }
+            Message::PublicLeaderBoard(leader_board) => { on_leader_board(leader_board); }
             Message::Challenge(challenge) => { on_challenge(stream, challenge);}
             Message::RoundSummary(summary) => {on_round_summary(stream, summary);}
             Message::EndOfGame(end_of_game) => {on_end_of_game(end_of_game); break;}

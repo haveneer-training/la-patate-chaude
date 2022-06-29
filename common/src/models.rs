@@ -1,4 +1,6 @@
 use serde::{Serialize, Deserialize};
+use crate::models_monstrous_maze::{MonstrousMazeInput, MonstrousMazeOutput};
+use crate::models_recover_secret::{RecoverSecretInput, RecoverSecretOutput};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Hello {}
@@ -37,12 +39,14 @@ pub struct PublicPlayer {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub enum Challenge {
-    NONE,
+    MonstrousMaze(MonstrousMazeInput),
+    RecoverSecret(RecoverSecretInput),
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub enum ChallengeAnswer {
-    NONE
+    MonstrousMaze(MonstrousMazeOutput),
+    RecoverSecret(RecoverSecretOutput),
 }
 
 #[derive(Debug, Serialize, Deserialize)]
