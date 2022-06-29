@@ -1,24 +1,22 @@
 mod server_communication;
 mod player_init;
+mod challenge;
 
 use std::io::Read;
 use std::net::{TcpStream};
 use serde::de::Unexpected::Str;
 
 use common::models::{Challenge, ChallengeAnswer, ChallengeResult, EndOfGame, Message, PublicPlayer, RoundSummary};
-use common::models_md5_hash_cash::{MD5HashCashInput, MD5HashCashOutput};
-use common::models_monstrous_maze::{MonstrousMazeInput, MonstrousMazeOutput};
-use common::models_recover_secret::{RecoverSecretInput, RecoverSecretOutput};
+use common::challenge::models_md5_hash_cash::{MD5HashCashInput, MD5HashCashOutput};
+use common::challenge::models_monstrous_maze::{MonstrousMazeInput, MonstrousMazeOutput};
+use common::challenge::models_recover_secret::{RecoverSecretInput, RecoverSecretOutput};
+use crate::challenge::md5_hash_cash::md5_challenge_resolver;
 use crate::player_init::{on_subscribe_result, on_welcome};
 use crate::server_communication::send_message;
 
 
 fn on_leader_board(leader_board: Vec<PublicPlayer>){
     println!("LeaderBoard: {leader_board:?}");
-}
-
-fn md5_challenge_resolver(input: MD5HashCashInput) -> MD5HashCashOutput{
-    return MD5HashCashOutput{seed: 0, hashcode: String::from("")};
 }
 
 fn maze_challenge_resolver(input: MonstrousMazeInput) -> MonstrousMazeOutput{
