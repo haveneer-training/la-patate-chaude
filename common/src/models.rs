@@ -26,6 +26,57 @@ pub enum SubscribeResult {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
+pub struct Player {
+    pub name: String,
+    pub stream_id: String,
+    pub score: i32,
+    pub steps: u32,
+    pub is_active: bool,
+    pub total_used_time: f64
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct LeaderBoard {
+    pub players: Vec<Player>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub enum Challenge {
+    NONE
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub enum ChallengeAnswer {
+    NONE
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct ChallengeResult {
+    pub name: ChallengeAnswer,
+    pub next_target: String,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub enum ChallengeValue {
+    Unreachable,
+    Timeout,
+    BadResult { used_time: f64, next_target: String },
+    Ok { used_time: f64, next_target: String }
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct ReportedChallengeResult {
+    pub name: String,
+    pub value: ChallengeValue
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct RoundSummary {
+    pub challenge: String,
+    pub chain: Vec<ReportedChallengeResult>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
 pub enum Message {
     Hello,
     Welcome(Welcome),
