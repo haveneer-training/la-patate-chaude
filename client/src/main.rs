@@ -4,9 +4,27 @@ mod player_init;
 use std::io::{Read, Write};
 use std::net::{TcpStream};
 
-use common::models::{Message, Subscribe, SubscribeResult, Welcome};
+use common::models::{Challenge, EndOfGame, Message, PublicPlayer, RoundSummary, Subscribe, SubscribeResult, Welcome};
 use crate::player_init::{on_subscribe_result, on_welcome};
 use crate::server_communication::send_message;
+
+
+fn on_leader_board(leader_board: Vec<PublicPlayer>){
+    println!("LeaderBoard: {leader_board:?}");
+}
+
+fn on_challenge(stream: &TcpStream, challenge: Challenge){
+
+}
+
+fn on_round_summary(stream: &TcpStream, summary: RoundSummary){
+    println!("RoundSummary: {summary:?}");
+
+}
+
+fn on_end_of_game(end_of_game: EndOfGame){
+    println!("EndOfGame: {end_of_game:?}");
+}
 
 fn main_loop(mut stream: &TcpStream, name: &String){
 
@@ -36,6 +54,10 @@ fn main_loop(mut stream: &TcpStream, name: &String){
             Message::Welcome(welcome) => { on_welcome(stream, welcome, name)}
             Message::Subscribe(_) => {}
             Message::SubscribeResult(subscribe_result) => { on_subscribe_result( subscribe_result); }
+            Message::PublicLeaderBoard(leaderBoard) => { on_leader_board(leaderBoard); }
+            Message::Challenge(challenge) => { on_challenge(stream, challenge);}
+            Message::RoundSummary(summary) => {on_round_summary(stream, summary);}
+            Message::EndOfGame(end_of_game) => {on_end_of_game(end_of_game); break;}
         }
     }
 
@@ -45,14 +67,12 @@ fn buffer_to_object(message_buf: &mut Vec<u8>) -> Message {
     let message = std::str::from_utf8(&message_buf).expect("failed to parse message");
     println!("message: {message:?}");
 
-    let record: Message = serde_json::from_str(&message).expect("failed to parse message");
+    let record: Message = serde_json::from_str(&message).expect("failed to serialize message");
     println!("message: {record:?}");
     record
 }
 
 fn main() {
-    println!("Hello, world!");
-
     let name = std::env::args().nth(1).expect("no name given");
 
     let stream = TcpStream::connect("localhost:7878");

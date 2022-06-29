@@ -26,7 +26,7 @@ pub enum SubscribeResult {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct Player {
+pub struct PublicPlayer {
     pub name: String,
     pub stream_id: String,
     pub score: i32,
@@ -36,13 +36,8 @@ pub struct Player {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct LeaderBoard {
-    pub players: Vec<Player>,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
 pub enum Challenge {
-    NONE
+    NONE,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -77,9 +72,18 @@ pub struct RoundSummary {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
+pub struct EndOfGame {
+    pub leader_board: Vec<PublicPlayer>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
 pub enum Message {
     Hello,
     Welcome(Welcome),
     Subscribe(Subscribe),
     SubscribeResult(SubscribeResult),
+    PublicLeaderBoard(Vec<PublicPlayer>),
+    Challenge(Challenge),
+    RoundSummary(RoundSummary),
+    EndOfGame(EndOfGame),
 }
