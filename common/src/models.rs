@@ -1,4 +1,5 @@
 use serde::{Serialize, Deserialize};
+use crate::models_md5_hash_cash::{MD5HashCashInput, MD5HashCashOutput};
 use crate::models_monstrous_maze::{MonstrousMazeInput, MonstrousMazeOutput};
 use crate::models_recover_secret::{RecoverSecretInput, RecoverSecretOutput};
 
@@ -39,12 +40,14 @@ pub struct PublicPlayer {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub enum Challenge {
+    MD5HashCash(MD5HashCashInput),
     MonstrousMaze(MonstrousMazeInput),
     RecoverSecret(RecoverSecretInput),
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub enum ChallengeAnswer {
+    MD5HashCash(MD5HashCashOutput),
     MonstrousMaze(MonstrousMazeOutput),
     RecoverSecret(RecoverSecretOutput),
 }

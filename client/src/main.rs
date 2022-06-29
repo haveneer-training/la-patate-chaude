@@ -1,7 +1,7 @@
 mod server_communication;
 mod player_init;
 
-use std::io::{Read};
+use std::io::Read;
 use std::net::{TcpStream};
 
 use common::models::{Challenge, EndOfGame, Message, PublicPlayer, RoundSummary};
