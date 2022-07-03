@@ -1,3 +1,5 @@
+extern crate core;
+
 mod server_communication;
 mod player_init;
 mod challenge;
