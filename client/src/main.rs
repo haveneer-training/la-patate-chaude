@@ -6,10 +6,8 @@ mod challenge;
 
 use std::io::Read;
 use std::net::{TcpStream};
-use serde::de::Unexpected::Str;
 
 use common::models::{Challenge, ChallengeAnswer, ChallengeResult, EndOfGame, Message, PublicPlayer, RoundSummary};
-use common::challenge::models_md5_hash_cash::{MD5HashCashInput, MD5HashCashOutput};
 use common::challenge::models_monstrous_maze::{MonstrousMazeInput, MonstrousMazeOutput};
 use common::challenge::models_recover_secret::{RecoverSecretInput, RecoverSecretOutput};
 use crate::challenge::md5_hash_cash::md5_challenge_resolver;
@@ -30,7 +28,7 @@ fn secret_challenge_resolver(input: RecoverSecretInput) -> RecoverSecretOutput{
 }
 
 fn on_challenge(stream: &TcpStream, challenge: Challenge){
-    let mut chalenge_answer :ChallengeAnswer;
+    let chalenge_answer :ChallengeAnswer;
 
     match challenge {
         Challenge::MD5HashCash(input) => { chalenge_answer = ChallengeAnswer::MD5HashCash( md5_challenge_resolver(input)); }

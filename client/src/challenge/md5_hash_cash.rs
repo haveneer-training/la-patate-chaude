@@ -1,6 +1,3 @@
-use std::fmt;
-use std::fmt::format;
-use std::io::{Bytes, Read};
 use md5;
 use md5::Digest;
 use common::challenge::models_md5_hash_cash::{MD5HashCashInput, MD5HashCashOutput};
@@ -17,8 +14,7 @@ pub fn md5_challenge_resolver(input: MD5HashCashInput) -> MD5HashCashOutput {
 
 fn check_number_of_bit_at_zero(number: &[u8], expected_of_zero: u32) -> bool {
 
-    let mut number_as_bits: u128 = 0;
-    number_as_bits = number[0] as u128;
+    let mut number_as_bits: u128 = number[0] as u128;
     for i in 1..number.len() {
         number_as_bits = number_as_bits << 8;
         number_as_bits += number[i] as u128;
