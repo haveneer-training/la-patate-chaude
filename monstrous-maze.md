@@ -39,7 +39,7 @@ Nous avons:
 | `#`                     | Mur infranchissable |
 | autres traits Ascii Art | Mur infranchissable |
 
-## Table des symboles de la grille
+## Table des symboles de description du chemin
 
 | Symbole | signification              |
 |---------|----------------------------|
