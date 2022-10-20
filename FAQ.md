@@ -65,3 +65,21 @@ Il y a plusieurs approches possibles :
 - une peu plus élaborée (ce qui n'est pas indispensable) est l'emploi de thread pour chaque client avec une primitive
   de type *barrier* pour attendre que tout le monde ait fini
 
+## Sérialisation par `serde` des chaînes de caractères
+
+Quand `serde` sérialise une chaîne de caractères, il protège tous les caractères d'échappement et les délimiteurs `"..."`.
+
+Ainsi les deux assertions suivantes sont vraies :
+```rust
+assert_eq!(
+    serde_json::to_string("a\nb\"c"),
+    Ok("\"a\\nb\\\"c\"") // string habituelles, il ne faut pas oublier de protéger spéciaux; moins facile à lire 
+);
+```
+
+```rust
+assert_eq!(
+    serde_json::to_string("a\nb\"c"),
+    Ok(r#""a\nb\"c""#) // raw string pas besoin de protéger les caractères; plus simple à lire
+);
+```
