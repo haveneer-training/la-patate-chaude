@@ -3,7 +3,7 @@
 En entrée du challenge, soient:
 
 * `grid`: une chaîne de caractères en UTF8,
-* `endurance`: un nombre de type `u8`
+* `endurance`: un nombre de type `u32`
 
 L'objet est du challenge est de trouver un chemin menant de l'entrée (représentée par le caractère `Y`) jusqu'à une
 sortie (représentée par le caractère `X`).
@@ -53,7 +53,7 @@ Nous avons:
 ```rust
 pub struct MonstrousMazeInput {
     pub grid: String,
-    pub endurance: u8,
+    pub endurance: u32,
 }
 
 pub struct MonstrousMazeOutput {
@@ -114,6 +114,10 @@ pub struct MonstrousMazeOutput {
   d'autres
 * L'augmentation de complexité portera sur la taille de la grille, le placement des entrées et sorties et le nombre de
   monstres présents (en particulier sur le chemin optimal).
+
+  En particulier, pour les complexités paires, seule la taille de la grille augmente (i.e. sans aucun monstres). 
+  Les monstres ne sont présents que pour les complexités impaires.
+
 * Il n'est pas demandé de trouver le plus court chemin, juste un chemin viable, i.e. faisable avec l'endurance
   disponible.
 
