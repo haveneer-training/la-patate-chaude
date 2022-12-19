@@ -1,29 +1,35 @@
-pub fn validateRecoverSecret() {
-    let test_word = "C'est chou";
-    let word_count = 2;
-    let letters = "t cCehuCethoCeschouC'schout h".to_string();
-    let tuple_sizes = [3, 4, 5, 7, 7, 3];
+pub struct RecoverSecretInput {
+    pub word_count: usize,
+    pub letters: String,
+    pub tuple_sizes: Vec<usize>,
+}
 
+pub struct RecoverSecretOutput {
+    pub secret_sentence: String,
+}
+
+pub fn validateRecoverSecretSentence(test_word: &str, recoverSecretInput: RecoverSecretInput) {
     // Validate a sentence test_word with letters and tuple_sizes
-    for i in 0..tuple_sizes.len(){
+    for i in 0..recoverSecretInput.tuple_sizes.len(){
         let mut startInterval = 0;
         let mut endInterval = 0;
         for j in 0..i{
-            startInterval = startInterval + tuple_sizes[j];
-            endInterval = endInterval + tuple_sizes[j];
+            startInterval = startInterval + recoverSecretInput.tuple_sizes[j];
+            endInterval = endInterval + recoverSecretInput.tuple_sizes[j];
         }
-        endInterval = endInterval + tuple_sizes[i];
+        endInterval = endInterval + recoverSecretInput.tuple_sizes[i];
 
-        let mut word = &letters[startInterval..endInterval];
+        let mut word = &recoverSecretInput.letters[startInterval..endInterval];
         // println!("{}", word);
         //println!("{}", patternWord(word, test_word));
         let status = patternWord(word, test_word);
         if (!status){
-            println!("Status of the sentence '{}' : {status}", test_word)
+            println!("Status of the sentence '{}' : {status}", test_word);
+            false;
         }
     }
-    println!("Status of the sentence '{}' is Good", test_word)
-
+    println!("Status of the sentence '{}' is Good", test_word);
+    true;
 }
 
 fn is_sorted<T>(data: Vec<i32>) -> bool
@@ -37,6 +43,7 @@ fn patternWord(pattern:&str, word:&str) -> bool {
     // Check contains all need characters
     let mut result: Vec<i32> = Vec::new();
     for i in 0..pattern.len(){
+        // Add indexes of found letters in result variable
         for j in 0..word.len(){
             if word.chars().nth(j).unwrap() == pattern.chars().nth(i).unwrap(){
                 result.push(j as i32);

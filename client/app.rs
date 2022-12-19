@@ -1,6 +1,6 @@
 use std::io::prelude::*;
 use std::net::TcpStream;
-use recoverSecret::validateRecoverSecret;
+use recoverSecret::{RecoverSecretInput, validateRecoverSecretSentence};
 
 mod recoverSecret;
 
@@ -13,5 +13,12 @@ fn main() {
     // stream.write(&len.to_be_bytes()).unwrap(); // on écrit le préfixe (taille du prochain message)
     // stream.write(message.as_bytes()).unwrap(); // puis le message en tant que tel
 
-    validateRecoverSecret();
+
+    let test_word = "C'est chou";
+    let recoverSecretInput = RecoverSecretInput{
+        word_count: 2,
+        letters: "t cCehuCethoCeschouC'schout h".to_string(),
+        tuple_sizes: Vec::from([3, 4, 5, 7, 7, 3])
+    };
+    validateRecoverSecretSentence(test_word, recoverSecretInput);
 }
