@@ -50,10 +50,6 @@ fn patternWord(pattern:&str, word:&str) -> bool {
             }
         }
     }
-    // Check we have got all the letters
-    if (result.len() != pattern.len()){
-        return false;
-    }
     // Check we have the letters in the correct order
     is_sorted::<u8>(result)
 }
