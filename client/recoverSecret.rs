@@ -8,7 +8,7 @@ pub struct RecoverSecretOutput {
     pub secret_sentence: String,
 }
 
-pub fn validateRecoverSecretSentence(test_word: &str, recoverSecretInput: RecoverSecretInput) {
+pub fn validateRecoverSecretSentence(test_word: &str, recoverSecretInput: RecoverSecretInput) -> bool {
     // Validate a sentence test_word with letters and tuple_sizes
     for i in 0..recoverSecretInput.tuple_sizes.len(){
         let mut startInterval = 0;
@@ -25,11 +25,11 @@ pub fn validateRecoverSecretSentence(test_word: &str, recoverSecretInput: Recove
         let status = patternWord(word, test_word);
         if (!status){
             println!("Status of the sentence '{}' : {status}", test_word);
-            false;
+            return false;
         }
     }
     println!("Status of the sentence '{}' is Good", test_word);
-    true;
+    return true;
 }
 
 fn is_sorted<T>(data: Vec<i32>) -> bool
