@@ -15,13 +15,12 @@ fn main() {
     // stream.write(&len.to_be_bytes()).unwrap(); // on écrit le préfixe (taille du prochain message)
     // stream.write(message.as_bytes()).unwrap(); // puis le message en tant que tel
     // generateRecoverSecretSentence();
-
-    println!(" {} ", getValueIndex("Hello!".to_string(), "l".to_string()));
 }
 
 #[cfg(test)]
 mod tests {
     use ::{RecoverSecretInput, validateRecoverSecretSentence};
+    use getValueIndex;
 
     #[test]
     fn should_validate_secret_sentence() {
@@ -69,5 +68,18 @@ mod tests {
             tuple_sizes: Vec::from([6, 8, 4, 6, 4, 7, 8, 9, 6, 9, 8, 7, 5, 7, 6, 6, 9, 5, 4, 5, 4])
         };
         assert!(!validateRecoverSecretSentence(test_word2, recoverSecretInput2));
+    }
+
+    #[test]
+    fn should_return_good_index_position(){
+        assert_eq!(getValueIndex("Hello!".to_string(), "l".to_string()), 2);
+        assert_eq!(getValueIndex("Hello!".to_string(), "H".to_string()), 0);
+        assert_eq!(getValueIndex("Hello!".to_string(), "o".to_string()), 4);
+    }
+
+    #[test]
+    fn should_not_return_good_index_position(){
+        assert_eq!(getValueIndex("Hello!".to_string(), "j".to_string()), -1);
+        assert_eq!(getValueIndex("Hello!".to_string(), "1".to_string()), -1);
     }
 }
