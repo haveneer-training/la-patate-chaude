@@ -1,6 +1,8 @@
+extern crate random_string;
+
 use std::io::prelude::*;
 use std::net::TcpStream;
-use recoverSecret::{RecoverSecretInput, validateRecoverSecretSentence};
+use recoverSecret::{getValueIndex, RecoverSecretInput, validateRecoverSecretSentence};
 
 mod recoverSecret;
 
@@ -12,8 +14,9 @@ fn main() {
     // let len = message.len() as u32;
     // stream.write(&len.to_be_bytes()).unwrap(); // on écrit le préfixe (taille du prochain message)
     // stream.write(message.as_bytes()).unwrap(); // puis le message en tant que tel
+    // generateRecoverSecretSentence();
 
-
+    println!(" {} ", getValueIndex("Hello!".to_string(), "l".to_string()));
 }
 
 #[cfg(test)]
@@ -23,16 +26,22 @@ mod tests {
     #[test]
     fn should_validate_secret_sentence() {
         // test 1
-        let test_word = "C'est chou";
+        // let test_word = "C'est chou";
+        let test_word = "Cet 'schou";
+
         let recoverSecretInput = RecoverSecretInput {
             word_count: 2,
             letters: "t cCehuCethoCeschouC'schout h".to_string(),
             tuple_sizes: Vec::from([3, 4, 5, 7, 7, 3])
+            // Cet 'schou
+            // si existe pas: ajouter à la fin
+            // si existe: le déplacer juste après notre dernière lettre trouvé ou ajouté
         };
         assert!(validateRecoverSecretSentence(test_word, recoverSecretInput));
 
         // test 2
         let test_word2 = "xWRvraj4fonTUmzyO25wA3lBeiM9H";
+        // let test_word2 = "WvAxayfUziSOl9BeH";
         let recoverSecretInput2 = RecoverSecretInput {
             word_count: 1,
             letters: "WvyOAlxafUzleiSOl9xayBeHTmy9xWTU5lMW4nUO5lMWRajn2BiHSRUzy5afnUz5wlexWrm5wlBWr4mAlBrUmzHxTUzwlHrfTwBeSRmzlMSRfoUOAe9S4oUiraOiramzM5w3l".to_string(),
@@ -44,7 +53,7 @@ mod tests {
     #[test]
     fn should_not_validate_secret_sentence() {
         // test 1
-        let test_word = "C'set chuo";
+        let test_word = "C'set chou";
         let recoverSecretInput = RecoverSecretInput {
             word_count: 2,
             letters: "t cCehuCethoCeschouC'schout h".to_string(),
