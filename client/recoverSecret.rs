@@ -11,6 +11,7 @@ pub struct RecoverSecretOutput {
     pub secret_sentence: String,
 }
 
+// Generate a correct Recover Secret Sentence respecting the tuple_sizes and letters parameters rules
 pub fn generateRecoverSecretSentence(tuple_sizes: Vec<usize>, letters: String) -> RecoverSecretOutput{
     let mut result: String = "".to_string();
     let mut status = false;
@@ -77,6 +78,7 @@ pub fn generateRecoverSecretSentence(tuple_sizes: Vec<usize>, letters: String) -
     return output;
 }
 
+// Get the index of letter parameter in word parameter as parameters
 pub fn getValueIndex(word: String, letter: String) -> i32 {
     for j in 0..word.len(){
         if word.chars().nth(j).unwrap() == letter.chars().nth(0).unwrap(){
@@ -86,6 +88,7 @@ pub fn getValueIndex(word: String, letter: String) -> i32 {
     return -1;
 }
 
+// Verify if a word or sentence respecting the tuple_sizes and letters parameters rules
 pub fn validateRecoverSecretSentence(test_word: String, tuple_sizes: Vec<usize>, letters: String) -> bool {
 
     // Validate a sentence test_word with letters and tuple_sizes
@@ -108,6 +111,7 @@ pub fn validateRecoverSecretSentence(test_word: String, tuple_sizes: Vec<usize>,
     return true;
 }
 
+// Verify if a Vector of i32 is sorted
 fn is_sorted<T>(data: Vec<i32>) -> bool
     where
         T: Ord,
@@ -115,6 +119,7 @@ fn is_sorted<T>(data: Vec<i32>) -> bool
     data.windows(2).all(|w| w[0] <= w[1])
 }
 
+// Verify if word parameter repects pattern variable
 fn patternWord(pattern:String, word: String) -> bool {
     // Check contains all need characters
     let mut result: Vec<i32> = Vec::new();
