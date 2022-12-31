@@ -2,6 +2,39 @@ use std::ptr::null;
 use random_string::generate;
 use RecoverSecretStruct::RecoverSecretOutput;
 
+// Verify if a word or sentence respecting the tuple_sizes and letters parameters rules
+pub fn validateRecoverSecretSentence(test_word: String, tuple_sizes: Vec<usize>, letters: String) -> bool {
+
+    // Validate a sentence test_word with letters and tuple_sizes
+    for i in 0..tuple_sizes.len(){
+        let mut startInterval = 0;
+        let mut endInterval = 0;
+        for j in 0..i{
+            startInterval = startInterval + tuple_sizes[j];
+            endInterval = endInterval + tuple_sizes[j];
+        }
+        endInterval = endInterval + tuple_sizes[i];
+
+        let mut word = &letters[startInterval..endInterval];
+        // println!("{}", patternWord(word, test_word));
+        let status = patternWord(word.to_string(), test_word.to_string());
+        if (!status){
+            return false;
+        }
+    }
+    return true;
+}
+
+// Get the index of letter parameter in word parameter as parameters
+pub fn getValueIndex(word: String, letter: String) -> i32 {
+    for j in 0..word.len(){
+        if word.chars().nth(j).unwrap() == letter.chars().nth(0).unwrap(){
+            return j as i32;
+        }
+    }
+    return -1;
+}
+
 // Generate a correct Recover Secret Sentence respecting the tuple_sizes and letters parameters rules
 pub fn generateRecoverSecretSentence(tuple_sizes: Vec<usize>, letters: String) -> RecoverSecretOutput{
     let mut result: String = "".to_string();
@@ -62,39 +95,6 @@ pub fn generateRecoverSecretSentence(tuple_sizes: Vec<usize>, letters: String) -
         secret_sentence: result
     };
     return output;
-}
-
-// Get the index of letter parameter in word parameter as parameters
-pub fn getValueIndex(word: String, letter: String) -> i32 {
-    for j in 0..word.len(){
-        if word.chars().nth(j).unwrap() == letter.chars().nth(0).unwrap(){
-            return j as i32;
-        }
-    }
-    return -1;
-}
-
-// Verify if a word or sentence respecting the tuple_sizes and letters parameters rules
-pub fn validateRecoverSecretSentence(test_word: String, tuple_sizes: Vec<usize>, letters: String) -> bool {
-
-    // Validate a sentence test_word with letters and tuple_sizes
-    for i in 0..tuple_sizes.len(){
-        let mut startInterval = 0;
-        let mut endInterval = 0;
-        for j in 0..i{
-            startInterval = startInterval + tuple_sizes[j];
-            endInterval = endInterval + tuple_sizes[j];
-        }
-        endInterval = endInterval + tuple_sizes[i];
-
-        let mut word = &letters[startInterval..endInterval];
-        // println!("{}", patternWord(word, test_word));
-        let status = patternWord(word.to_string(), test_word.to_string());
-        if (!status){
-            return false;
-        }
-    }
-    return true;
 }
 
 // Verify if a Vector of i32 is sorted
