@@ -1,15 +1,6 @@
 use std::ptr::null;
 use random_string::generate;
-
-pub struct RecoverSecretInput {
-    pub word_count: usize,
-    pub letters: String,
-    pub tuple_sizes: Vec<usize>,
-}
-
-pub struct RecoverSecretOutput {
-    pub secret_sentence: String,
-}
+use RecoverSecretStruct::RecoverSecretOutput;
 
 // Generate a correct Recover Secret Sentence respecting the tuple_sizes and letters parameters rules
 pub fn generateRecoverSecretSentence(tuple_sizes: Vec<usize>, letters: String) -> RecoverSecretOutput{
@@ -27,7 +18,6 @@ pub fn generateRecoverSecretSentence(tuple_sizes: Vec<usize>, letters: String) -
             }
             endInterval = endInterval + tuple_sizes[i];
             let mut word = &letters[startInterval..endInterval];
-            // println!("word : {}", word);
 
             let mut prec_letter:i32;
             for i in 0..word.len(){
@@ -36,7 +26,6 @@ pub fn generateRecoverSecretSentence(tuple_sizes: Vec<usize>, letters: String) -
                 // If letter of pattern do not exist, add to the end of result
                 if tmp_index==-1 {
                     result = result.to_owned() + &*word.chars().nth(i).unwrap().to_string();
-                    // println!("result 0: {}", result);
                 }
                 // If letter of pattern do exist
                 else if i!=0 && tmp_index<getValueIndex(result.to_string(), word.chars().nth(i-1).unwrap().to_string()){
@@ -56,18 +45,15 @@ pub fn generateRecoverSecretSentence(tuple_sizes: Vec<usize>, letters: String) -
                         let mut cutted = &result[tmp_index as usize..first_word_letter as usize].to_string();
                         let new_resutlt = result[..tmp_index as usize].to_string() + &result[first_word_letter as usize..prec_plus as usize].to_string() + &*cutted.to_string() + &result[prec_plus as usize..].to_string();
                         result = new_resutlt;
-                        // println!("result 1 : {}", result);
                     }
                     else{
                         let mut cutted = &result[tmp_index as usize..prec_letter as usize].to_string();
                         let new_resutlt = result[0..tmp_index as usize].to_string() + &result[prec_letter as usize..].to_string() + &*cutted.to_string();
                         result = new_resutlt;
-                        // println!("result 2: {}", result);
                     }
                 }
                 prec_letter = i as i32;
             }
-            // println!("\nNew result: {}\n", result);
         }
         status = validateRecoverSecretSentence(result.clone().to_string(), tuple_sizes.clone(), letters.clone())
     }
