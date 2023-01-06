@@ -5,7 +5,7 @@ authors = ["@soulte92", "@sarah-bouadi", "@cawa-dev"]
 
 [[bin]]
 name = "client"
-path = "client/app.rs"
+path = "client/main.rs"
 
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }

@@ -1,5 +1,5 @@
-use RecoverSecretStruct::{RecoverSecretInput, RecoverSecretOutput};
-use  utils::{pattern_word, get_value_index, is_sorted};
+use  recover_secret::utils::{pattern_word, get_value_index, is_sorted};
+use ::{RecoverSecretInput, RecoverSecretOutput};
 
 pub trait Challenge {
     /// Data input of the challenge
@@ -17,7 +17,7 @@ pub trait Challenge {
 }
 
 pub struct RecoverSecretChallenge{
-    input: RecoverSecretInput
+    pub input: RecoverSecretInput
 }
 
 impl Challenge for RecoverSecretChallenge{

@@ -3,29 +3,26 @@ extern crate random_string;
 use std::borrow::Borrow;
 use std::io::prelude::*;
 use std::net::TcpStream;
-use recover_secret::{Challenge, RecoverSecretChallenge};
-use RecoverSecretStruct::{RecoverSecretInput, RecoverSecretOutput};
 
-mod recoverSecret;
-mod RecoverSecretStruct;
 mod recover_secret;
-mod utils;
+use recover_secret::data_structures::{RecoverSecretInput, RecoverSecretOutput};
+use recover_secret::recover_secret_challenge::{Challenge, RecoverSecretChallenge};
 
 fn main() {
     let first_test_word = "C'est chou";
-    let recoverSecretOutput = RecoverSecretOutput{
+    let recover_secret_output = RecoverSecretOutput{
         secret_sentence: first_test_word.to_string()
     };
 
-    let recoverSecretInput = RecoverSecretInput {
+    let recover_secret_input = RecoverSecretInput {
         word_count: 2,
         letters: "t cCehuCethoCeschouC'schout h".to_string(),
         tuple_sizes: Vec::from([3, 4, 5, 7, 7, 3])
     };
 
-    let challenge_recover_secret = RecoverSecretChallenge::new(recoverSecretInput);
+    let challenge_recover_secret = RecoverSecretChallenge::new(recover_secret_input);
 
-    let status = challenge_recover_secret.verify(&recoverSecretOutput);
+    let status = challenge_recover_secret.verify(&recover_secret_output);
     let out = challenge_recover_secret.solve();
     println!("{}", out.secret_sentence);
 
