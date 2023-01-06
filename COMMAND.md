@@ -11,5 +11,5 @@
 ---
 ### Command to execute the client 😄
 ```bash
-cargo run --bin client
+cargo run --bin src
 ```

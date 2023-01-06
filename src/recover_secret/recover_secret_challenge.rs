@@ -16,7 +16,7 @@ pub trait Challenge {
     fn verify(&self, answer: &Self::Output) -> bool;
 }
 
-pub struct RecoverSecretChallenge{
+pub struct RecoverSecretChallenge {
     pub input: RecoverSecretInput
 }
 
