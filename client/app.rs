@@ -1,9 +1,3 @@
-mod hash_collection;
-
-
-use std::io::prelude::*;
-use std::net::TcpStream;
-
 fn main() {
     let message = b"000000000000034Chello";
 
