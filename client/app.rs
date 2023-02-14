@@ -35,11 +35,11 @@ fn check_seed(seed: String, message: String, hash: String) -> bool{
 }
 
 fn solve(message: String, complexity: u32, hash: String) -> u64 {
-    let mut seed:u64 = 0;
     let complexity_usize: usize = complexity as usize;
-    while !check_seed(format!("{:016x}",seed).to_string(), message.clone(), hash.clone()){
-        seed = generate_seed_md5(complexity_usize);
-        println!("{:016x}", seed)
+    let mut seed: u64 = 0;
+
+    while !check_seed(format!("{:016x}", seed).to_string(), message.clone(), hash.clone()) {
+        seed += 1;
     }
     seed
 }
