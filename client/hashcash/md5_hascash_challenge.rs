@@ -1,6 +1,6 @@
 use rayon::in_place_scope;
 use ::{MD5HashCashInput};
-use hashcash::utils::{check_seed, count_zero_bits, generated_md5_from_string};
+use hashcash::utils::{count_zero_bits, generated_md5_from_string};
 use MD5HashCashOutput;
 
 pub trait Challenge {
