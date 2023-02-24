@@ -115,7 +115,7 @@ mod tests {
     #[test]
     fn should_not_count_zero_bits_correctly(){
         //TODO to correct
-        let givenHash = "00441745E9BDF8E5D3C7872AC9DBB2C3";
+        let givenHash = "EDFA9929B7A9A03A8098168A5CE867AA";
         let givenComplexity = 9;
         assert_ne!(count_zero_bits(givenHash, givenComplexity), 9);
     }
