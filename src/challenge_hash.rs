@@ -6,8 +6,8 @@ use std::num::ParseIntError;
 use std::str::FromStr;
 use serde::Deserializer;
 use serde_json::Value;
-use crate::Challenge;
-
+//use crate::Challenge;
+use crate::challenge::Challenge;
 
 
 // Ajout des bibliothèques externes nécessaires
@@ -205,6 +205,23 @@ impl Challenge for MD5HashCashChallenge {
         // Vérifie si les données en sortie sont égales à celles calculées lors de la création du challenge
         self.md5HashCashOuput == *output
     }
+}
+
+#[test]
+fn test_md5_hash_cash_input_from_str_valid_input() {
+    let input_str = "00000 hello".to_string();
+    let expected_input = MD5HashCashInput {
+        complexity: 5,
+        message: "hello".to_string(),
+    };
+    assert_eq!(input_str.parse::<MD5HashCashInput>().unwrap(), expected_input);
+}
+
+#[test]
+fn test_md5_hash_cash_input_from_str_missing_message() {
+    let input_str = "00000".to_string();
+    let expected_err = "Missing message".to_string();
+    assert_eq!(input_str.parse::<MD5HashCashInput>().unwrap_err(), expected_err);
 }
 
     /*

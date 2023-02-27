@@ -9,15 +9,6 @@ edition = "2021"
 name = "client"
 path = "src/client.rs"
 
-[[bin]]
-name = "server"
-path = "src/server.rs"
-
-[[bin]]
-name = "challenge_hash"
-path = "src/challenge_hash.rs"
-
-
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }
 md-5 = "0.10.5"
