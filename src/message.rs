@@ -7,7 +7,8 @@ enum Result {
 }
 #[derive(Debug, Deserialize, Serialize)]
 pub enum Challenge {
-    MD5HashCash(ChallengeInput)
+    MD5HashCash(ChallengeInputHash),
+    MonstrousMaze(ChallengeInputMonstrous)
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -56,9 +57,15 @@ enum ChallengeName {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct ChallengeInput {
+pub struct ChallengeInputHash {
     pub complexity: u8,
     pub message: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct ChallengeInputMonstrous{
+    pub grid: String,
+    pub endurance: u32,
 }
 
 #[derive(Debug, Deserialize, Serialize)]

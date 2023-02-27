@@ -9,7 +9,8 @@ use std::string::String;
 mod message;
 use message::Message;
 use crate::message::Challenge::MD5HashCash;
-use crate::message::{ChallengeInput, PublicPlayer};
+use crate::message::Challenge::MonstrousMaze;
+use crate::message::{ChallengeInputHash, ChallengeInputMonstrous, PublicPlayer};
 mod challenge_hash;
 mod challenge;
 use challenge::Challenge;
@@ -84,7 +85,10 @@ fn main() {
                 println!("Vous avez ete vire");
                 break;
             }
-            Message::Challenge(MD5HashCash(ChallengeInput{ complexity , message }))=>{
+            Message::Challenge(MonstrousMaze(ChallengeInputMonstrous{grid, endurance}))=>{
+                println!("monstrous");
+            },
+            Message::Challenge(MD5HashCash(ChallengeInputHash{ complexity , message }))=>{
                 let input: MD5HashCashInput = MD5HashCashInput{
                     complexity: u32::from(complexity),
                     message
