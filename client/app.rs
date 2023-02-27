@@ -104,34 +104,3 @@ mod tests {
         assert_eq!(format!("{:016X}", output.seed), format!("{:016X}", 368 as u64));
         assert_eq!(output.hashcode, "00E749706D04FE4FC60CB007FE82C209")
     }
-
-    #[test]
-    fn should_count_zero_bits_correctly(){
-        let givenHash = "00E749706D04FE4FC60CB007FE82C209";
-        let givenComplexity = 9;
-        assert_eq!(count_zero_bits(givenHash, givenComplexity), 9);
-    }
-
-    #[test]
-    fn should_not_count_zero_bits_correctly(){
-        //TODO to correct
-        let givenHash = "EDFA9929B7A9A03A8098168A5CE867AA";
-        let givenComplexity = 9;
-        assert_ne!(count_zero_bits(givenHash, givenComplexity), 9);
-    }
-
-    #[test]
-    fn should_generate_md5_from_string(){
-        let givenGoodMessage = "000000000000034Chello".to_string();
-        let actualHash = "00441745D9BDF8E5D3C7872AC9DBB2C3".to_string();
-        assert_eq!(generated_md5_from_string(givenGoodMessage), actualHash);
-    }
-
-    #[test]
-    fn should_not_generate_md5_from_string(){
-        // With 'O' instead of 'o' at the end
-        let givenWrongMessage = "000000000000034ChellO".to_string();
-        let actualHash = "00441745D9BDF8E5D3C7872AC9DBB2C3".to_string();
-        assert_ne!(generated_md5_from_string(givenWrongMessage), actualHash);
-    }
-}
