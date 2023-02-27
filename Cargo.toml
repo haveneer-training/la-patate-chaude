@@ -7,15 +7,15 @@ edition = "2021"
 
 [[bin]]
 name = "client"
-path = "../../../../../CLionProjects/la-patate-chaude/src/client.rs"
+path = "src/client.rs"
 
 [[bin]]
 name = "server"
-path = "../../../../../CLionProjects/la-patate-chaude/src/server.rs"
+path = "src/server.rs"
 
 [[bin]]
 name = "challenge_hash"
-path = "../../../../../CLionProjects/la-patate-chaude/src/challenge_hash.rs"
+path = "src/challenge_hash.rs"
 
 
 [dependencies]
