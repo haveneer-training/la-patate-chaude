@@ -1,0 +1,26 @@
+[package]
+name = "demo-4AL1"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[bin]]
+name = "client"
+path = "../../../../../CLionProjects/la-patate-chaude/src/client.rs"
+
+[[bin]]
+name = "server"
+path = "../../../../../CLionProjects/la-patate-chaude/src/server.rs"
+
+[[bin]]
+name = "challenge_hash"
+path = "../../../../../CLionProjects/la-patate-chaude/src/challenge_hash.rs"
+
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+md-5 = "0.10.5"
+serde_json = "1"
+hex_lit = "0.1.1"
+rand = "0.8.5"
