@@ -209,7 +209,7 @@ impl Challenge for MD5HashCashChallenge {
 
 #[test]
 fn test_md5_hash_cash_input_from_str_valid_input() {
-    let input_str = "00000 hello".to_string();
+    let input_str = "5 hello".to_string();
     let expected_input = MD5HashCashInput {
         complexity: 5,
         message: "hello".to_string(),
